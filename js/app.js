@@ -52,9 +52,55 @@ class Persona {
       Edad: ${this.#edad}
       DNI: ${this.#DNI}
       Sexo: ${this.#sexo}
-      Peso: ${this.#peso}
-      Altura: ${this.#altura}
+      Peso (Kg): ${this.#peso}
+      Altura (m): ${this.#altura}
       Año de Nacimiento: ${this.#anioNacimiento}
       `)
   }
 }
+
+let personaCreada = null;
+
+document.getElementById("crearPersona").addEventListener("click", function (e) {
+  e.preventDefault();
+  const nombre = document.getElementById("nombre").value;
+  const edad = parseInt(document.getElementById("edad").value);
+  const dni = document.getElementById("dni").value;
+  const sexo = document.getElementById("sexo").value.toUpperCase();
+  const peso = parseFloat(document.getElementById("peso").value);
+  const altura = parseFloat(document.getElementById("altura").value);
+  const fechaNacimiento = document.getElementById("anioNacimiento").value;
+
+  const anioNacimiento = new Date(fechaNacimiento).getFullYear();
+
+  personaCreada = new Persona(nombre, edad, dni, sexo, peso, altura, anioNacimiento);
+
+  alert("¡Datos ingresados correctamente!");
+});
+
+document.getElementById("generacion").addEventListener("click", function (e) {
+  e.preventDefault();
+  if (personaCreada) {
+    personaCreada.mostrarGeneracion();
+  } else {
+    alert("Primero debes ingresar los datos en el formulario.");
+  }
+});
+
+document.getElementById("mayorEdad").addEventListener("click", function (e) {
+  e.preventDefault();
+  if (personaCreada) {
+    personaCreada.esMayorDeEdad();
+  } else {
+    alert("Primero debes ingresar los datos en el formulario.");
+  }
+});
+
+document.getElementById("mostrarDatos").addEventListener("click", function (e) {
+  e.preventDefault();
+  if (personaCreada) {
+    personaCreada.mostrarDatos();
+  } else {
+    alert("Primero debes ingresar los datos en el formulario.");
+  }
+});
